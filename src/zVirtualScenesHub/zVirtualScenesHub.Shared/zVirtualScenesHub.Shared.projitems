@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c2189ea6-7d2a-4d58-92d0-63a28fcc4733</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>zVirtualScenesHub</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)API\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Configuration\IConfigurationReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Configuration\WindowsStorageConfigurationReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Credential.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Credentials.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\CredentialStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\ILog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\ILogManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\LogManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\Serialization\ISerialize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\Serialization\JSONSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\Serialization\NewtonSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\UrlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Helpers\WP7Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\HttpClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\HttpDelegates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\HttpPayload.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\IHttpClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\IUrlBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\StopWatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\HTTP\VirtualClientHttp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Interfaces\IServiceController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\BuiltinCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\CommandsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Details.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Device.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\DeviceCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\DeviceCommandResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\DeviceCommands.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\DeviceDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Devices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\DeviceValues.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Group.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\GroupDetailsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\GroupsResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\LoginResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\SceneNameChangeResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\SceneResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Models\Value.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Storage\IStoreage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Storage\WindowsStorage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\VirtualScenes34\VirtualScenes34UrlBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\VirtualScenes34\VitualScenes34Controller.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+  </ItemGroup>
+</Project>
