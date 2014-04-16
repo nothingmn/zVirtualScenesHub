@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
+using zVirtualScenesHub.ViewModels;
 
 namespace zVirtualScenesHub
 {
@@ -44,6 +45,16 @@ namespace zVirtualScenesHub
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            this.Loaded += HubPage_Loaded;
+        }
+
+        void HubPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (this.viewModel.SelectedCredential == null)
+            {
+                Frame.Navigate(typeof(CredentialPage));
+            }
         }
 
         /// <summary>
@@ -52,15 +63,6 @@ namespace zVirtualScenesHub
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
-        }
-
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
         }
 
         /// <summary>
@@ -79,7 +81,11 @@ namespace zVirtualScenesHub
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             //var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
             //this.DefaultViewModel["Groups"] = sampleDataGroups;
+            this.DataContext = viewModel;
+
         }
+
+        private DevicesAndScenesViewModel viewModel = new DevicesAndScenesViewModel();
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the

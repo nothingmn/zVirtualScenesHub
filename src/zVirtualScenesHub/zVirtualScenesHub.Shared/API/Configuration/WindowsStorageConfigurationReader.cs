@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -12,7 +13,7 @@ namespace zVirtualScenesHub.API.Configuration
     {
         private string FileName(string Key)
         {
-            return string.Format("{0}.setting");
+            return string.Format("{0}.setting", Key);
         }
 
         public async Task<T> ReadSetting<T>(string Key)
@@ -41,23 +42,42 @@ namespace zVirtualScenesHub.API.Configuration
             }
         }
 
+        private async Task<bool> FileExists(string fileName )
+        {
+            try
+            {
+                var folder = ApplicationData.Current.LocalFolder;
+                var file = await folder.GetFileAsync(fileName);
+                return (file != null);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public async Task<string> ReadFileContentsAsync(string fileName)
         {
             var folder = ApplicationData.Current.LocalFolder;
 
             try
             {
-                var file = await folder.OpenStreamForReadAsync(fileName);
-
-                using (var streamReader = new StreamReader(file))
+                var exists = await FileExists(fileName);
+                if (exists)
                 {
-                    return streamReader.ReadToEnd();
+                    var file = await folder.OpenStreamForReadAsync(fileName);
+                    using (file)
+                    {
+                        using (var streamReader = new StreamReader(file))
+                        {
+                            return await streamReader.ReadToEndAsync();
+                        }
+                    }
                 }
             }
             catch (Exception)
             {
-                return string.Empty;
             }
+            return string.Empty;
         }
     }
 }

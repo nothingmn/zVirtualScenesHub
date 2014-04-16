@@ -12,10 +12,9 @@ namespace zVirtualClient
         {
             ConfigurationReader = configurationReader;
             Init();
-            SetupDefault();
         }
 
-        private async Task Init()
+        private void Init()
         {
             if (ConfigurationReader == null)
             {
@@ -24,13 +23,10 @@ namespace zVirtualClient
             try
             {
                 Credentials = new Credentials();
-                var profilesIndex = await ConfigurationReader.ReadSetting<string>("Profiles");
+                var profilesIndex =  ConfigurationReader.ReadSetting<string>("Profiles").Result;
                 if (!string.IsNullOrEmpty(profilesIndex))
                 {
-                    Credentials = NewtonSerializer<Credentials>.FromJSON<Credentials>(profilesIndex);
-
-
-                    //Credentials = Newtonsoft.Json.JsonConvert.DeserializeObject<Credentials>(profilesIndex);
+                    Credentials = NewtonSerializer<Credentials>.FromJSON<Credentials>(profilesIndex);                    
                     foreach (var c in Credentials)
                     {
                         if (c.Default)
@@ -46,21 +42,6 @@ namespace zVirtualClient
             {
             }
             
-        }
-
-        private void SetupDefault()
-        {
-            if (DefaultCredential == null)
-            {
-                DefaultCredential = new Credential();
-                DefaultCredential.Default = true;
-                DefaultCredential.Name = "Profile 1";
-                DefaultCredential.Host = "localhost";
-                DefaultCredential.Port = 6000;
-                DefaultCredential.Password = "password";
-                Credentials.Add(DefaultCredential);
-                this.Save();
-            }
         }
 
         public Credential DefaultCredential { get; set; }
@@ -82,14 +63,14 @@ namespace zVirtualClient
             }
             return null;
         }
-        public void Save()
+        public async void Save()
         {
             try
             {
                 var payload = zVirtualClient.Helpers.Serialization.NewtonSerializer<Credentials>.ToJSON(Credentials);
                 if (!string.IsNullOrEmpty(payload))
                 {
-                    ConfigurationReader.WriteSetting("Profiles", payload);
+                    await ConfigurationReader.WriteSetting("Profiles", payload);
                 }
             }
             catch (Exception e) 
@@ -187,7 +168,6 @@ namespace zVirtualClient
                     if (deleteMe.Default)
                     {
                         DefaultCredential = null;
-                        SetupDefault();
                     }
                     else
                     {
